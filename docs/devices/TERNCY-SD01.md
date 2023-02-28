@@ -1,6 +1,6 @@
 ---
 title: "TERNCY TERNCY-SD01 control via MQTT"
-description: "Integrate your TERNCY TERNCY-SD01 via Zigbee2MQTT with whatever smart home infrastructure you are using without the vendors bridge or gateway."
+description: "Integrate your TERNCY TERNCY-SD01 via Zigbee2MQTT with whatever smart home infrastructure you are using without the vendor's bridge or gateway."
 addedAt: 2020-02-26T17:45:15Z
 pageClass: device-page
 ---
@@ -16,7 +16,7 @@ pageClass: device-page
 |     |     |
 |-----|-----|
 | Model | TERNCY-SD01  |
-| Vendor  | TERNCY  |
+| Vendor  | [TERNCY](/supported-devices/#v=TERNCY)  |
 | Description | Knob smart dimmer |
 | Exposes | battery, action, direction, linkquality |
 | Picture | ![TERNCY TERNCY-SD01](https://www.zigbee2mqtt.io/images/devices/TERNCY-SD01.jpg) |
@@ -52,7 +52,7 @@ This device supports OTA updates, for more information see [OTA updates](../guid
 ## Exposes
 
 ### Battery (numeric)
-Remaining battery in %.
+Remaining battery in %, can take up to 24 hours before reported..
 Value can be found in the published state on the `battery` property.
 It's not possible to read (`/get`) or write (`/set`) this value.
 The minimal value is `0` and the maximum value is `100`.

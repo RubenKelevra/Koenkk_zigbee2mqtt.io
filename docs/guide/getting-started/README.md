@@ -11,14 +11,14 @@ In order to use Zigbee2MQTT we need the following hardware:
 
 1. <img src="../../images/zzh.jpg" title="ZZH" class="float-left" /> **A Zigbee Adapter** which is the interface between the Computer (or Server) where you run Zigbee2MQTT and the Zigbee radio
 communication. Zigbee2MQTT supports a variety of adapters with different kind of connections like USB, GPIO or remote via WIFI or Ethernet.
-  Recommended adapters have a chip starting with CC2652 or CC1352. See [supported Adapters](../adapters/README.md). <br class="clear" />
+  Recommended adapters have a chip starting with CC2652 or CC1352. See [supported Adapters](../adapters/README.md). It's recommended to check out your adapter's recommendation details before the installation process, to find out whether it needs any additional configuration parameters. <br class="clear" />
 
-2. <img src="../../images/pi.jpg" title="Raspberry Pi" class="float-left" /> **A Server** where you would run Zigbee2MQTT. Most Raspberry-Pi models are known to work but you can run it on many computers and platforms including Linux, Windows an MacOS. <br class="clear" />
+2. <img src="../../images/pi.jpg" title="Raspberry Pi" class="float-left" /> **A Server** where you would run Zigbee2MQTT. Most Raspberry-Pi models are known to work but you can run it on many computers and platforms including Linux, Windows and MacOS. It should have an MQTT broker installed. [Mosquitto](https://www.mosquitto.org/download/) ([Tutorial for Raspberry-Pi](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/)) is the recommended MQTT broker but [others](https://mqtt.org/software/) should also work fine. <br class="clear" />
 
 3. <img src="../../images/xiaomi_sensors.jpg" title="Zigbee devices" class="float-left" /> One or more **Zigbee Devices** which will be paired with Zigbee2MQTT. <br class="clear" />
 
 ::: tip TIP
-<img alt="USB Cable" src="../../images/usb_extension_cable.jpg" class="float-left" /> To improve network range and stability use a USB extension cable.
+<img alt="USB Cable" src="../../images/usb_extension_cable.jpg" class="float-left" /> To improve network range and stability use a USB extension cable. If you experience ANY trouble with device (timeouts, not pairing, devices unreachable, devices dropping from the network, etc.) this is the first thing to do to avoid interference.
 See [Improve network range and stability](../../advanced/zigbee/02_improve_network_range_and_stability.md). <br class="clear" />
 :::
 
@@ -53,9 +53,10 @@ Here we can see that the adapter is owned by `root` and accessible from all user
 
 ### 2.) Setup and start Zigbee2MQTT
 
-It's assumed, that you've a recent version of Docker and Docker-Compose is installed.
+It's assumed, that you have a recent version of Docker and Docker Compose installed.
 
-First, we create the `docker-compose.yml` file which defines how Docker would run our containers. The following file consists of two services, one for the MQTT-Server and one for Zigbee2MQTT itself. Be sure to adjust the file to your needs and match the devices-mount in the case your adapter was not mounted on `/dev/ttyUSB0`.
+
+First, we create a folder where we want the project to reside `mkdir folder-name`. In the folder, we create we save the `docker-compose.yml` file which defines how Docker would run our containers. The following file consists of two services, one for the MQTT-Server and one for Zigbee2MQTT itself. Be sure to adjust the file to your needs and match the devices-mount in the case your adapter was not mounted on `/dev/ttyUSB0`.
 
 
 ```yaml
@@ -86,12 +87,12 @@ services:
       - /dev/ttyUSB0:/dev/ttyUSB0
 ```
 
-In the next step we'll create a simple [Zigbee2MQTT config file](../configuration/) in `zigbee2mqtt-data/configuration.yml`.
+In the next step we'll create a simple [Zigbee2MQTT config file](../configuration/) in `zigbee2mqtt-data/configuration.yaml`.
 
 ```yaml
 # Let new devices join our zigbee network
 permit_join: true
-# Docker-Compose makes the MQTT-Server available using "mqtt" hostname
+# Docker Compose makes the MQTT-Server available using "mqtt" hostname
 mqtt:
   base_topic: zigbee2mqtt
   server: mqtt://mqtt
@@ -114,10 +115,10 @@ $ find
 ./zigbee2mqtt-data/configuration.yaml
 
 # First start
-$ docker-compose up -d
+$ docker compose up -d
 
 # Check the logs
-$ docker-compose logs -f
+$ docker compose logs -f
 ```
 
 After some short time you should see some log messages that Mosquitto and Zigbee2MQTT is running now.
