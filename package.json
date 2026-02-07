@@ -46,7 +46,7 @@
         "typescript": "5.6.3",
         "vue": "3.5.12",
         "vuepress": "2.0.0-rc.18",
-        "webpack": "5.95.0",
+        "webpack": "5.104.1",
         "zigbee-herdsman-converters": "20.38.0"
     }
 }
